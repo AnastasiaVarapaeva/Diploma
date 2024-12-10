@@ -1,6 +1,12 @@
 import allure
 import requests
-from config import *
+
+
+baseURL = "https://www.aviasales.ru/"
+baseURL_api = "https://min-prices.aviasales.ru/price_matrix?"
+my_headers = {
+    "Content-Type": "application/json"
+}
 
 @allure.title("Поиск билета в одну сторону - позитивная проверка")
 @allure.feature("GET")
@@ -14,6 +20,7 @@ def test_get_oneway_positive() -> str:
     lst = tickets_list.json()
     with allure.step("Проверка"):
         assert len(lst) > 0
+        assert tickets_list.status_code == 200, "Некорректный статус-код"
 
 @allure.title("Поиск билета в обе стороны - позитивная проверка")
 @allure.feature("GET")
@@ -28,6 +35,7 @@ def test_get_twoways_positive() -> str:
     lst = tickets_list.json()
     with allure.step("Проверка"):
         assert len(lst) > 0
+        assert tickets_list.status_code == 200, "Некорректный статус-код"
 
 @allure.title("Поиск билета с числом 31 месяца с 31 днями - позитивная проверка")
 @allure.feature("GET")
@@ -42,6 +50,7 @@ def test_get_date_31_positive() -> str:
     lst = tickets_list.json()
     with allure.step("Проверка"):
         assert len(lst) > 0
+        assert tickets_list.status_code == 200, "Некорректный статус-код"
 
 @allure.title("Поиск билета с числом 31 месяца с 30 днями - негативная проверка")
 @allure.feature("GET")

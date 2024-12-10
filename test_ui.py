@@ -32,6 +32,7 @@ def test_hotels():
     main_page.click_search()
     with allure.step("Проверка того, что открывается страница https://www.aviasales.ru/ при поиске билетов"):
         assert "https://www.aviasales.ru/" in driver.current_url
+    driver.quit()
 
 @allure.title("Проверка загаловка страницы")
 @allure.severity("medium")
@@ -41,6 +42,7 @@ def test_text():
     header = driver.find_element(By.CSS_SELECTOR, "h1.header__title")
     with allure.step("Проверка того, что в заголовке указан нужный текст"):
         assert header.text == expected_text
+    driver.quit()
 
 @allure.title("Негативный тест на проверку заполнения без города")
 @allure.severity("critical")
@@ -50,6 +52,7 @@ def test_negative_destination():
     element = driver.find_element(By.XPATH, '//div[text()="Укажите город прибытия"]')
     with allure.step("Проверка того, что незаполненное поле Куда подчвечивается"):
         assert element.is_displayed()
+    driver.quit()
 
 @allure.title("Негативный тест на проверку заполнения без даты")
 @allure.severity("critical")
@@ -59,3 +62,4 @@ def test_negative_date():
     element = driver.find_element(By.XPATH, '//div[text()="Укажите дату"]')
     with allure.step("Проверка того, что незаполненное поле Дата подчвечивается"):
         assert element.is_displayed()
+    driver.quit()
